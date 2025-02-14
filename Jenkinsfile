@@ -90,7 +90,7 @@ pipeline {
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
                         sh """
                             cd backend &&
-                            docker build -t rupesh1997/devops-day-06:1.0.0 -f ../docker/backend/Dockerfile .
+                            docker build -t rupesh1997/devops-day-06:1.0.2 -f ../docker/backend/Dockerfile .
                         """
                     }
                 }
@@ -99,7 +99,7 @@ pipeline {
 
         stage('Docker Image Scan') {
             steps {
-                sh "trivy image --format table -o trivy-image-report.html rupesh1997/devops-day-06:1.0.0"
+                sh "trivy image --format table -o trivy-image-report.html rupesh1997/devops-day-06:1.0.2"
             }
         }
 
@@ -107,7 +107,7 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                        sh "docker push rupesh1997/devops-day-06:1.0.0"
+                        sh "docker push rupesh1997/devops-day-06:1.0.2"
                     }
                 }
             }
